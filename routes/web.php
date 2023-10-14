@@ -24,6 +24,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/random', [App\Http\Controllers\QuoteController::class, 'randomQuote'])->name('quotes.random');
 
 Route::middleware(['auth'])->group(function () {
+
+    //CRUD Quotes
+    Route::get('quotes/me', [App\Http\Controllers\QuoteController::class, 'indexMine'])->name('quotes.myquotes');
+    Route::resource('quotes', App\Http\Controllers\QuoteController::class);
+
+    //User profile
     Route::get('/profile' , [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.getform');
 
     Route::post('/profile' , [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');    

@@ -22,7 +22,16 @@ class QuoteController extends Controller
      */
     public function index()
     {
-        //
+        $quotes = Quote::orderBy('created_at', 'desc')->paginate(10);
+
+        return view('quotes.index', compact('quotes'));
+    }
+
+    public function indexMine()
+    {
+        $quotes = Quote::where('owner', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('quotes.index_mine', compact('quotes'));
     }
 
     /**
