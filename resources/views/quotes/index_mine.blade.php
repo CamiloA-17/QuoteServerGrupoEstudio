@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container text-center">
         <h1>Mis citas</h1>
+        <a href="{{ route('quotes.create') }}" class="btn btn-primary mb-3">Crear cita</a>
         <table class=table>
             <thead>
                 <tr>
@@ -25,11 +26,11 @@
                         <td>{{ $quote -> message}}</td>
                         <td>{{ $quote -> created_at}}</td>
                         <td>{{ $quote -> updated_at}}</td>
-                        <td>...</td>
+                        <td><a href="{{ route('quotes.edit', [$quote->id]) }}"  class="btn btn-warning">Editar</a></td>
                     </tr>
                     @endforeach
                 @else
-                    <div class="alert alert-success">
+                    <div class="alert alert-success" role="alert">
                         <p>No hay citas para mostrar</p>
                     </div>
                 @endif

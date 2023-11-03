@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Quote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\QuoteStoreRequest;
 
 class QuoteController extends Controller
 {
@@ -39,15 +41,24 @@ class QuoteController extends Controller
      */
     public function create()
     {
-        //
+        //mostrar el formulario de crear una quote
+        return view('quotes.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(QuoteStoreRequest $request)
     {
-        //
+        //crea la quote en la base de datos
+        $quote = new Quote();
+        $quote->author = $request->author;
+        $quote->message = $request->message;
+        $quote->published_year = $request->published_year;
+        $quote->owner = Auth::id();
+        $quote->save();
+
+        return redirect()->route('quotes.myquotes')->with('success', 'La cita fue agregada exitosamente.');
     }
 
     /**
@@ -55,7 +66,7 @@ class QuoteController extends Controller
      */
     public function show(Quote $quote)
     {
-        //
+        //mostrar una quote en particular
     }
 
     /**
@@ -63,7 +74,8 @@ class QuoteController extends Controller
      */
     public function edit(Quote $quote)
     {
-        //
+        //vista para editar una quote
+        return view('quotes.edit', compact('quote'));
     }
 
     /**
@@ -71,7 +83,9 @@ class QuoteController extends Controller
      */
     public function update(Request $request, Quote $quote)
     {
-        //
+        //logica de editar la quote
+        $quote->update($request->all());
+        return redirect()->route('quotes.myquotes')->with('success', 'La cita fue actualizada exitosamente.');
     }
 
     /**
@@ -79,6 +93,6 @@ class QuoteController extends Controller
      */
     public function destroy(Quote $quote)
     {
-        //
+        //eliminar la quote
     }
 }

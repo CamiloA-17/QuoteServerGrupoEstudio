@@ -59,6 +59,9 @@
                                     <a class="dropdown-item" href="{{ route('quotes.myquotes') }}">
                                         {{ __('My quotes') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('quotes.create') }}">
+                                        {{ __('Create quotes') }}
+                                    </a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -91,6 +94,15 @@
                 @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 @endif
             </div>
