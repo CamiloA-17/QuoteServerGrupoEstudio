@@ -32,7 +32,9 @@ Route::middleware(['auth'])->group(function () {
     //User profile
     Route::get('/profile' , [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.getform');
 
-    Route::post('/profile' , [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');    
+    Route::post('/profile' , [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    
+    Route::get('/profile/{user}' , [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
 });
 #################################################################################
 

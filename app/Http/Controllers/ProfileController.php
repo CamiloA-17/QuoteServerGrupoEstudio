@@ -25,4 +25,9 @@ class ProfileController extends Controller
 
         return redirect(route('home'))->with('success', 'Perfil actualizado correctamente');
     }
+
+    public function show(User $user){
+
+        return view('profile.show', compact('user'));
+    }
 }

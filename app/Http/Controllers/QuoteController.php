@@ -67,6 +67,7 @@ class QuoteController extends Controller
     public function show(Quote $quote)
     {
         //mostrar una quote en particular
+        return view('quotes.show', compact('quote'));
     }
 
     /**
@@ -94,5 +95,7 @@ class QuoteController extends Controller
     public function destroy(Quote $quote)
     {
         //eliminar la quote
+        $quote->delete();
+        return redirect()->route('quotes.myquotes')->with('success', "La cita {$quote->id} fue removida exitosamente.");
     }
 }

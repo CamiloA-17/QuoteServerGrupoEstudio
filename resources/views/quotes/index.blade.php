@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <p class="card-text">{{$quote -> message}}</p>
                     <h3 class="card-title">{{$quote -> author}}</h3>
-                    <a href="#" class="card-link">Ver perfil de {{$quote -> user -> name}}</a>
+                        <a href="{{ route('profile.show', $quote -> user)}}" class="card-link">Ver perfil de {{$quote -> user -> name}}</a>
                 </div>
             </div>
             @endforeach
